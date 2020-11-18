@@ -1,4 +1,9 @@
 const mongoose = require('mongoose');
+const MONGO_HOST = process.env.MONGO_HOST || 'localhost';
+
+mongoose.connect(`mongodb://${MONGO_HOST}/Product`)
+  .then(() => console.log('Connected to MongoDB!'))
+  .catch((err) => console.error("Coudn't connect MongoDB:", err));
 
 const product = new mongoose.Schema({
   product_id: Number,
@@ -12,9 +17,12 @@ const product = new mongoose.Schema({
   },
   specs: {
     part_Number: String,
-    GTIN: Number,
-  },
-
+    GTIN: Number
+  }
 });
 
-module.exports.Product = mongoose.model('Product', product);
+const Product = mongoose.model('Product', product);
+
+module.exports = {
+  Product
+}
