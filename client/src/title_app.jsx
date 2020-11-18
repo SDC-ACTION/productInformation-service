@@ -28,11 +28,10 @@ class TitleApp extends React.Component {
     let count = 0;
     let sumRatings = 0;
     const location = window.location.pathname.split('/');
-    let id = location[(location.length - 2)] || '1';
-    id = id.replace('/', '');
-    let reviewID = id || '1';
-    reviewID = reviewID.replace('/', '');
-    fetch(`http://3.138.189.215:3004/api/products/${id}`)
+    const id = location[2];
+    const reviewID = location[2];
+
+    fetch(`http://localhost:3004/api/products/${id}`)
       .then((response) => response.json())
       .then((data) => {
         this.setState({
