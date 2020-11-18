@@ -6,7 +6,10 @@ mongoose.connect(`mongodb://${MONGO_HOST}/Product`)
   .catch((err) => console.error("Coudn't connect MongoDB:", err));
 
 const product = new mongoose.Schema({
-  product_id: Number,
+  product_id: {
+    type: Number,
+    required: true
+  },
   description: String,
   title: String,
   brand: String,
