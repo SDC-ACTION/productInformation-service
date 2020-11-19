@@ -1,11 +1,12 @@
 const router = require('express').Router();
 const controller = require('../controllers');
 
-/* ----------------------- Internal---------- */
-router.get('/products/:product_id', controller.title);
-router.get('/brand/:brand', controller.brand);
+router.get('/products/:product_id', controller.getProduct);
 
-/* ----------------------- External---------- */
-// router.get('reviews/product_id');
+router.post('/products', controller.saveProduct);
+
+router.put('/products', controller.updateProduct);
+
+router.delete('/products', controller.deleteProduct);
 
 module.exports = router;

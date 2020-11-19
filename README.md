@@ -1,13 +1,27 @@
 # Project Name
 
-> Project description
-
-## Related Projects
-
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+API Endpoints
+  GET (/api/products/:product_id)
+    -Gets the product information based on the params of product_id
+  POST (/api/products)
+    -Pass in JSON object containing the product information
+    -For example:
+      {
+        "id": 300,
+        "description": "test product to send",
+        "title": "Test Product",
+        "brand": "Test TM",
+        "name": "The Tester",
+        "age": "21",
+        "player_Count": "Too many",
+        "part_Number": "1231839",
+        "GTIN": 5
+      }
+  PUT (/api/products)
+    -Pass in JSON object containing the updated product information
+    -Required to pass in all product information
+  DELETE (/api/products)
+    -Pass in JSON object with key id containing the product id to delete
 
 ## Table of Contents
 
