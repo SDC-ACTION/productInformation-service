@@ -42,6 +42,18 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 ## Development
 
+1. Postgres
+  Installation
+    -brew install postgresql
+  Create database
+    -Run "createdb products"
+  Generate informations table
+    -From the root of the project directory, run "psql products -f database/postgres/schema.sql"
+    -Table was successfully created if "CREATE TABLE" shows up in the terminal
+  Seeding the database
+    -Run "npm run seed postgres"
+    -Warning: Seeding may take up to an hour depending on the capabilities of the machine
+
 ### Installing Dependencies
 
 From within the root directory:
