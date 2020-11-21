@@ -46,9 +46,9 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 # Postgres
   1. Installation
-    *brew install postgresql
+    brew install postgresql
   2. Create database
-    *Run `createdb products`
+    Run `createdb products`
   3. Generate informations table
     From the root of the project directory, run `psql products -f database/postgres/schema.sql`
     Schema was successfully created if "CREATE TABLE" shows up in the terminal
