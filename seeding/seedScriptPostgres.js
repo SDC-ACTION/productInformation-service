@@ -1,4 +1,4 @@
-const { pool } = require('../database/postgres/model/index.js');
+const { pool, close } = require('../database/postgres/model/index.js');
 const helper = require('../public/helper-functions.js');
 
 const products = [];
@@ -41,52 +41,33 @@ function createNewProducts() {
 };
 
 const insertData = productList => {
-  // const insert = 'INSERT INTO INFORMATION (description, title, brand, name, age, player_Count, part_Number, GTIN) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-  const insert = 'INSERT INTO INFORMATION (description) VALUES (?)'
+  const insert = 'INSERT INTO INFORMATION (description, title, brand, name, age, player_Count, part_Number, GTIN) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
   const savedProducts = [];
 
-  // productList.forEach(product => {
-  //     const saveProduct = new Promise(reject => {
-  //       pool.query(insert,
-  //         [product.product_id, product.description, product.title, product.brand, product.category.name, product.category.age, product.category.playerCount, product.specs.part_Number, product.specs.GTIN],
-  //         err => {
-  //           err ? reject(err) : resolve();
-  //         }
-  //       )
-  //     });
-  //     savedProducts.push(saveProduct);
-  // })
   productList.forEach(product => {
-    const saveProduct = new Promise(reject => {
-      pool.query(insert,
-        [product.description],
-        err => {
+    const saveProduct = new Promise((resolve, reject) => {
+      pool.connect((err, client, done) => {
+        client.query(insert, [product.description, product.title, product.brand, product.category.name, product.category.age, product.category.playerCount, product.specs.part_Number, product.specs.GTIN], err => {
           err ? reject(err) : resolve();
-        }
-      )
-    });
+          done();
+        })
+      })
+    })
     savedProducts.push(saveProduct);
-})
+  })
   return Promise.all(savedProducts);
-};
-
-const seedData = async () => {
-  createNewProducts();
-  await insertData(products);
-  process.exit();
 }
 
-seedData();
-
-/*
-  products array looks like this
-    {
-    product_id: 100,
-    description: 'Aenean vehicula congue tortoreleifend justo aCurabitur in blandit diamnec molestie risus auctor velSed ornare bibendum variusVivamus eleifend sed nulla nec tempor',
-    title: 'tincidunt',
-    brand: 'ipsum',
-    category: { name: 'sit', age: '12 Player', playerCount: '1 Player' },
-    specs: { part_Number: 'Donec5882', GTIN: '75122254014261' }
+const seedData = async () => {
+  try {
+    createNewProducts();
+    await insertData(products).catch(err => console.log(err));
+  } catch(err) {
+    throw new Error(err);
   }
-]
-*/
+};
+
+seedData()
+  .then(() => {
+    process.exit();
+  });
