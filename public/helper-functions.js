@@ -1,4 +1,4 @@
-const { Product } = require('../database/models/product.js', {
+const { Product } = require('../database/mongoose/models/product.js', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
