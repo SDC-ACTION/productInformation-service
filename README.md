@@ -2,11 +2,11 @@
 
 API Endpoints
   1. GET (/api/products/:product_id)
-    *Gets the product information based on the params of product_id
+    Gets the product information based on the params of product_id
   2. POST (/api/products)
-    *Pass in JSON object containing the product information
-    *For example:
-    ```
+    Pass in JSON object containing the product information
+    For example:
+    ```javascript
       {
         "id": 300,
         "description": "test product to send",
@@ -20,10 +20,10 @@ API Endpoints
       }
     ```
   3. PUT (/api/products)
-    *Pass in JSON object containing the updated product information
-    *Required to pass in all product information
+    Pass in JSON object containing the updated product information
+    Required to pass in all product information
   4. DELETE (/api/products)
-    *Pass in JSON object with key id containing the product id to delete
+    Pass in JSON object with key id containing the product id to delete
 
 ## Table of Contents
 
@@ -48,13 +48,13 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
   1. Installation
     *brew install postgresql
   2. Create database
-    *Run ```createdb products```
+    *Run `createdb products`
   3. Generate informations table
-    *From the root of the project directory, run ```psql products -f database/postgres/schema.sql```
-    *able was successfully created if "CREATE TABLE" shows up in the terminal
+    From the root of the project directory, run `psql products -f database/postgres/schema.sql`
+    Schema was successfully created if "CREATE TABLE" shows up in the terminal
   4. Seeding the database
-    *Run ```npm run seed postgres```
-    *Warning: Seeding may take up to an hour depending on the capabilities of the machine
+    Run `npm run seed postgres`
+    Warning: Seeding may take up to an hour depending on the capabilities of the machine
 
 ### Installing Dependencies
 
