@@ -53,8 +53,18 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
     From the root of the project directory, run `psql products -f database/postgres/schema.sql`
     Schema was successfully created if "CREATE TABLE" shows up in the terminal
   4. Seeding the database
-    Run `npm run seed postgres`
+    Run `npm run seed-postgres`
     Warning: Seeding may take up to an hour depending on the capabilities of the machine
+
+# CouchDB
+  1. Installation
+    Download CouchDB from https://couchdb.apache.org/#download
+  2. Create Database
+    Launch CouchDB which launches the interface Fauxton
+    Set up an account with username & password, and create a database called products
+  3. Seeding the database
+    Change the username & password to your local settings @ 'database/couchdb/models/index.js'
+    Run `npm run seed-couchdb`
 
 ### Installing Dependencies
 
