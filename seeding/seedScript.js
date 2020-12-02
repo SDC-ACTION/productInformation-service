@@ -13,11 +13,8 @@ const playerCount = ['1 Player', '2 Player', '3 Player', '4 Player', '5 Player',
 const partNumber = ['Lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit', 'Sed', 'volutpat', 'feugiat', 'consequat', 'Donec', 'id', 'faucibus', 'ligula', 'Maecenas', 'lobortis', 'laoreet', 'maximus', 'Donec', 'vel', 'nunc', 'mi', 'Nam', 'rutrum', 'rutrum', 'convallis', 'Donec', 'tempus', 'gravida', 'risus', 'laoreet', 'elementum', 'Fusce', 'congue', 'rhoncus', 'sollicitudin', 'Nunc', 'quis'];
 
 function createNewProducts() {
-  // const products = [];
-
-  // for (let i = 1; i < 100; i += 1) {
     const productObject = {};
-    // productObject.product_id = i;
+
     productObject.description = `${descriptionChoice[randNum(0, 24)]}${
       descriptionChoice[randNum(0, 24)]
     }${descriptionChoice[randNum(0, 24)]
@@ -28,18 +25,13 @@ function createNewProducts() {
       descriptionChoice[randNum(0, 24)]}`;
     productObject.title = titleChoice[Math.floor(Math.random(0, titleChoice.length))];
     productObject.brand = brandName[randNum(1, 8)];
-    // productObject.category = {};
     productObject.name = categoryName[randNum(0, 4)];
     productObject.age = (randNum(3, 18)).toString().concat(' Player');
     productObject.playerCount = playerCount[randNum(0, 6)];
-    // productObject.specs = {};
     // eslint-disable-next-line max-len
     productObject.part_Number = partNumber[randNum(0, 40)] + gtinStr(4).toString();
     productObject.GTIN = gtinStr(14);
     return productObject;
-  //   products.push(productObject);
-  // }
-  // return products;
 }
 
 const seed = async () => {

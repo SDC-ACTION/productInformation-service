@@ -49,12 +49,11 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
     brew install postgresql
   2. Create database
     Run `createdb products`
-  3. Generate informations table
+  3. Generate the CSV file with mock data
+    Run `npm run seed-csv`
+  4. Seed informations table for database
     From the root of the project directory, run `psql products -f database/postgres/schema.sql`
-    Schema was successfully created if "CREATE TABLE" shows up in the terminal
-  4. Seeding the database
-    Run `npm run seed-postgres`
-    Warning: Seeding may take up to an hour depending on the capabilities of the machine
+    Schema was successfully created if "CREATE TABLE" and "COPY 10000000" shows up in the terminal
 
 # CouchDB
   1. Installation
