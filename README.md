@@ -61,9 +61,12 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
   2. Create Database
     Launch CouchDB which launches the interface Fauxton
     Set up an account with username & password, and create a database called products
-  3. Seeding the database
-    Change the username & password to your local settings @ 'database/couchdb/models/index.js'
-    Run `npm run seed-couchdb`
+  3. Generating the CSV file
+    Run `npm run seed-csv-index`
+  4. Seed CouchDB database
+    Open a terminal window, navigate to this project directory.
+    Run `cat seedIndex.csv | couchimport --url http://user:password@localhost:5984 --db products --delimiter ','`
+    Total insertion of database can take anywhere from 40-50 minutes.
 
 ### Installing Dependencies
 
