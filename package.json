@@ -13,6 +13,7 @@
     "server-dev": "nodemon server/index.js",
     "seed-production": "node -r dotenv/config seeding/seedScript.js",
     "seed-dev": "node seeding/seedScript.js",
+    "seed-csv": "node database/CSVgenerator.js",
     "seed-postgres": "node seeding/seedScriptPostgres.js",
     "seed-couchdb": "node seeding/seedScriptCouchDB.js",
     "test": "nyc --reporter=html --reporter=text mocha --require esm _test_/seed.spec/seed.spec.js --exit; nyc --reporter=html --reporter=text mocha _test_/server.spec/server.spec.js --exit",

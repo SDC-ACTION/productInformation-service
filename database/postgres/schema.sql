@@ -9,3 +9,9 @@ CREATE TABLE information (
   part_Number VARCHAR(200),
   GTIN BIGINT
 );
+
+COPY information (description, title, brand, name, age, player_Count, part_Number, GTIN)
+-- CHANGE FILE PATH TO YOUR RELATIVE ABSOLUTE
+FROM '/Users/teddykim/HackReactor/rpt23/SDC/Product-Information-Service/seed.csv'
+DELIMITER ','
+CSV HEADER;
