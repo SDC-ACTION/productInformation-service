@@ -32,14 +32,10 @@ class SpecsApp extends React.Component {
     fetch(`http://localhost:3004/api/products/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        const containerObj = data.category;
-        containerObj.brand = data.brand;
-        const specsParts = data.specs.part_Number;
-        const specsGTIN = data.specs.GTIN;
         this.setState({
           brand: data.brand || '',
-          specsParts: specsParts || '',
-          specsGTIN: specsGTIN || 0,
+          specsParts: data.part_number || '',
+          specsGTIN: data.gtin || 0,
         });
       })
       .catch((err) => {

@@ -31,9 +31,7 @@ class DescriptionApp extends React.Component {
     fetch(`http://localhost:3004/api/products/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        const containerObj = data.category;
-        containerObj.brand = data.brand;
-        const categoryBrand = Object.values(containerObj);
+        const categoryBrand = [data.name, data.age, data.player_count]
         this.setState({
           description: data.description || '',
           categoryBrand: categoryBrand || [],

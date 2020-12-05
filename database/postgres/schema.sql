@@ -1,3 +1,4 @@
+-- million unique brandname records relational to product information brandname id
 CREATE TABLE information (
   id SERIAL PRIMARY KEY,
   description VARCHAR(2000),

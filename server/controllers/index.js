@@ -1,84 +1,66 @@
-const lodash = require('lodash');
-const { Product } = require('../../database/models/product.js');
+const { pool } = require('../../database/postgres/model/index.js');
 
 const getProduct = async (req, res) => {
   const id = req.params.product_id;
+  const query = {
+    text: 'SELECT * FROM information WHERE id = $1',
+    values: [id]
+  }
 
   try {
-    const productInfo = await Product.find({product_id: id});
-    const productDetails = lodash.omit(productInfo[0]._doc, ['_id', '__v']);
-    res.status(200).send(productDetails);
+    let productInfo = await pool.query(query);
+    res.status(200).send(productInfo.rows[0]);
   } catch(err) {
     res.sendStatus(500);
-    throw new Error(err);
+    console.log(`Failed to find product due to ${err}`);
   }
 };
 
 const saveProduct = async (req, res) => {
   const product = req.body;
-
-  const newProduct = new Product({
-    product_id: product.id,
-    description: product.description,
-    title: product.title,
-    brand: product.brand,
-    category: {
-      name: product.name,
-      age: product.age,
-      player_Count: product.player_Count
-    },
-    specs: {
-      part_Number: product.part_Number,
-      GTIN: product.GTIN
-    }
-  });
+  const insert = {
+    text: 'INSERT INTO INFORMATION (description, title, brand, name, age, player_Count, part_Number, GTIN) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
+    values: [product.description, product.title, product.brand, product.name, product.age, product.player_Count, product.part_Number, product.GTIN]
+  }
 
   try {
-    await newProduct.save();
-    res.sendStatus(200);
+    await pool.query(insert);
+    res.sendStatus(201);
   } catch(err) {
     res.sendStatus(500);
-    throw new Error(err);
+    console.log(`Failed to save product due to ${err}`);
   }
 };
 
 const updateProduct = async (req, res) => {
   const updatedProduct = req.body;
+  const update = {
+    text: 'UPDATE information SET description = $2, title = $3, brand = $4, name = $5, age = $6, player_Count = $7, part_Number = $8, GTIN = $9 WHERE id = $1',
+    values: [updatedProduct.id, updatedProduct.description, updatedProduct.title, updatedProduct.brand, updatedProduct.name, updatedProduct.age, updatedProduct.player_Count, updatedProduct.part_Number, updatedProduct.GTIN]
+  }
 
   try {
-    await Product.updateOne({
-      product_id: updatedProduct.id,
-      $set: {
-        description: updatedProduct.description,
-        title: updatedProduct.title,
-        brand: updatedProduct.brand,
-        category: {
-          name: updatedProduct.name,
-          age: updatedProduct.age,
-          player_Count: updatedProduct.player_Count,
-        },
-        specs: {
-          part_Number: updatedProduct.part_Number,
-          GTIN: updatedProduct.GTIN
-        }
-      }
-    });
+    await pool.query(update);
     res.sendStatus(200);
   } catch(err) {
     res.sendStatus(500);
-    throw new Error(err);
+    console.log(`Failed to update product due to ${err}`);
   }
 };
 
 const deleteProduct = async (req, res) => {
-  const id = Number(req.body.id);
+  const id = req.body.id;
+  const deleteProduct = {
+    text: 'DELETE FROM information WHERE id = $1',
+    values: [id]
+  }
 
   try {
-    await Product.deleteOne({"product_id": id});
+    await pool.query(deleteProduct);
     res.sendStatus(200);
   } catch(err) {
     res.sendStatus(500);
-    throw new Error(err);
+    console.log(`Failed to delete product due to ${err}`);
   }
 };
 
