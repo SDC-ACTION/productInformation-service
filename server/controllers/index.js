@@ -1,4 +1,3 @@
-const lodash = require('lodash');
 const { pool } = require('../../database/postgres/model/index.js');
 
 const getProduct = async (req, res) => {
@@ -7,6 +6,7 @@ const getProduct = async (req, res) => {
     text: 'SELECT * FROM information WHERE id = $1',
     values: [id]
   }
+
   try {
     let productInfo = await pool.query(query);
     res.status(200).send(productInfo.rows[0]);
@@ -16,33 +16,21 @@ const getProduct = async (req, res) => {
   }
 }
 
-// const saveProduct = async (req, res) => {
-//   const product = req.body;
+const saveProduct = async (req, res) => {
+  const product = req.body;
+  const insert = {
+    text: 'INSERT INTO INFORMATION (description, title, brand, name, age, player_Count, part_Number, GTIN) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
+    values: [product.description, product.title, product.brand, product.name, product.age, product.player_Count, product.part_Number, product.GTIN]
+  }
 
-//   const newProduct = new Product({
-//     product_id: product.id,
-//     description: product.description,
-//     title: product.title,
-//     brand: product.brand,
-//     category: {
-//       name: product.name,
-//       age: product.age,
-//       player_Count: product.player_Count
-//     },
-//     specs: {
-//       part_Number: product.part_Number,
-//       GTIN: product.GTIN
-//     }
-//   });
-
-//   try {
-//     await newProduct.save();
-//     res.sendStatus(200);
-//   } catch(err) {
-//     res.sendStatus(500);
-//     throw new Error(err);
-//   }
-// };
+  try {
+    await pool.query(insert);
+    res.sendStatus(201);
+  } catch(err) {
+    res.sendStatus(500);
+    throw new Error(err);
+  }
+}
 
 // const updateProduct = async (req, res) => {
 //   const updatedProduct = req.body;
@@ -85,8 +73,8 @@ const getProduct = async (req, res) => {
 // };
 
 module.exports = {
-  getProduct
-  // saveProduct,
+  getProduct,
+  saveProduct
   // updateProduct,
   // deleteProduct
 };
