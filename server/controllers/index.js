@@ -14,7 +14,7 @@ const getProduct = async (req, res) => {
     res.sendStatus(500);
     throw new Error(err);
   }
-}
+};
 
 const saveProduct = async (req, res) => {
   const product = req.body;
@@ -30,7 +30,7 @@ const saveProduct = async (req, res) => {
     res.sendStatus(500);
     throw new Error(err);
   }
-}
+};
 
 const updateProduct = async (req, res) => {
   const updatedProduct = req.body;
@@ -46,23 +46,27 @@ const updateProduct = async (req, res) => {
     res.sendStatus(500);
     throw new Error(err);
   }
-}
+};
 
-// const deleteProduct = async (req, res) => {
-//   const id = Number(req.body.id);
+const deleteProduct = async (req, res) => {
+  const id = req.body.id;
+  const deleteProduct = {
+    text: 'DELETE FROM information WHERE id = $1',
+    values: [id]
+  }
 
-//   try {
-//     await Product.deleteOne({"product_id": id});
-//     res.sendStatus(200);
-//   } catch(err) {
-//     res.sendStatus(500);
-//     throw new Error(err);
-//   }
-// };
+  try {
+    await pool.query(deleteProduct);
+    res.sendStatus(200);
+  } catch(err) {
+    res.sendStatus(500);
+    throw new Error(err);
+  }
+};
 
 module.exports = {
   getProduct,
   saveProduct,
   updateProduct,
-  // deleteProduct
+  deleteProduct
 };
