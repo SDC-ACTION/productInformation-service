@@ -32,33 +32,21 @@ const saveProduct = async (req, res) => {
   }
 }
 
-// const updateProduct = async (req, res) => {
-//   const updatedProduct = req.body;
+const updateProduct = async (req, res) => {
+  const updatedProduct = req.body;
+  const update = {
+    text: 'UPDATE information SET description = $2, title = $3, brand = $4, name = $5, age = $6, player_Count = $7, part_Number = $8, GTIN = $9 WHERE id = $1',
+    values: [updatedProduct.id, updatedProduct.description, updatedProduct.title, updatedProduct.brand, updatedProduct.name, updatedProduct.age, updatedProduct.player_Count, updatedProduct.part_Number, updatedProduct.GTIN]
+  }
 
-//   try {
-//     await Product.updateOne({
-//       product_id: updatedProduct.id,
-//       $set: {
-//         description: updatedProduct.description,
-//         title: updatedProduct.title,
-//         brand: updatedProduct.brand,
-//         category: {
-//           name: updatedProduct.name,
-//           age: updatedProduct.age,
-//           player_Count: updatedProduct.player_Count,
-//         },
-//         specs: {
-//           part_Number: updatedProduct.part_Number,
-//           GTIN: updatedProduct.GTIN
-//         }
-//       }
-//     });
-//     res.sendStatus(200);
-//   } catch(err) {
-//     res.sendStatus(500);
-//     throw new Error(err);
-//   }
-// };
+  try {
+    await pool.query(update);
+    res.sendStatus(200);
+  } catch(err) {
+    res.sendStatus(500);
+    throw new Error(err);
+  }
+}
 
 // const deleteProduct = async (req, res) => {
 //   const id = Number(req.body.id);
@@ -74,7 +62,7 @@ const saveProduct = async (req, res) => {
 
 module.exports = {
   getProduct,
-  saveProduct
-  // updateProduct,
+  saveProduct,
+  updateProduct,
   // deleteProduct
 };
