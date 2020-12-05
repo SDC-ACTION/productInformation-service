@@ -12,7 +12,7 @@ const getProduct = async (req, res) => {
     res.status(200).send(productInfo.rows[0]);
   } catch(err) {
     res.sendStatus(500);
-    throw new Error(err);
+    console.log(`Failed to find product due to ${err}`);
   }
 };
 
@@ -28,7 +28,7 @@ const saveProduct = async (req, res) => {
     res.sendStatus(201);
   } catch(err) {
     res.sendStatus(500);
-    throw new Error(err);
+    console.log(`Failed to save product due to ${err}`);
   }
 };
 
@@ -44,7 +44,7 @@ const updateProduct = async (req, res) => {
     res.sendStatus(200);
   } catch(err) {
     res.sendStatus(500);
-    throw new Error(err);
+    console.log(`Failed to update product due to ${err}`);
   }
 };
 
@@ -60,7 +60,7 @@ const deleteProduct = async (req, res) => {
     res.sendStatus(200);
   } catch(err) {
     res.sendStatus(500);
-    throw new Error(err);
+    console.log(`Failed to delete product due to ${err}`);
   }
 };
 
