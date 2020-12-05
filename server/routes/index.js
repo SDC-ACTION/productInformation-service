@@ -3,10 +3,10 @@ const controller = require('../controllers');
 
 router.get('/products/:product_id', controller.getProduct);
 
-router.post('/products', controller.saveProduct);
+// router.post('/products', controller.saveProduct);
 
-router.put('/products', controller.updateProduct);
+// router.put('/products', controller.updateProduct);
 
-router.delete('/products', controller.deleteProduct);
+// router.delete('/products', controller.deleteProduct);
 
 module.exports = router;
