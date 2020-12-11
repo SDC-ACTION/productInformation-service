@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3004;
 app.use(cors());
 app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: true }));
-
+console.log('server is hit');
 app.use('/products/:product_id', express.static(client));
 app.use('/', express.static(client));
 
