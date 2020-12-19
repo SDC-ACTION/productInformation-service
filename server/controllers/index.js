@@ -1,4 +1,9 @@
 const { pool } = require('../../database/postgres/model/index.js');
+const redis = require('redis');
+
+const client = redis.createClient({port: 6379});
+
+client.on('error', err => console.log(`Error: ${err}`));
 
 const getProduct = async (req, res) => {
   const id = req.params.product_id;
@@ -7,13 +12,29 @@ const getProduct = async (req, res) => {
     values: [id]
   }
 
-  try {
-    let productInfo = await pool.query(query);
-    res.status(200).send(productInfo.rows[0]);
-  } catch(err) {
-    res.sendStatus(500);
-    console.log(`Failed to find product due to ${err}`);
-  }
+  client.get(id, async (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else if (data) {
+      res.status(200).send(data);
+    } else {
+        try {
+          let productInfo = await pool.query(query);
+          res.status(200).send(productInfo.rows[0]);
+        } catch(err) {
+          res.sendStatus(500);
+          console.log(`Failed to find product due to ${err}`);
+        }
+    }
+  })
+
+  // try {
+  //   let productInfo = await pool.query(query);
+  //   res.status(200).send(productInfo.rows[0]);
+  // } catch(err) {
+  //   res.sendStatus(500);
+  //   console.log(`Failed to find product due to ${err}`);
+  // }
 };
 
 const saveProduct = async (req, res) => {
