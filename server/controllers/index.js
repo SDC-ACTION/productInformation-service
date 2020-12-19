@@ -20,6 +20,7 @@ const getProduct = async (req, res) => {
     } else {
         try {
           let productInfo = await pool.query(query);
+          client.set(id, JSON.stringify(productInfo.rows[0]));
           res.status(200).send(productInfo.rows[0]);
         } catch(err) {
           res.sendStatus(500);
