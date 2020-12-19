@@ -1,6 +1,13 @@
 ## MAC files ##
 .DS_Store
 
+#CSV files
+seed.csv
+
+#Stress testing
+newrelic.js
+newrelic_agent.log
+
 ## NPM ##
 npm
 npm-debug.log

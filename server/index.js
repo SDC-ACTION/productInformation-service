@@ -1,3 +1,4 @@
+require('newrelic');
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -14,7 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/products/:product_id', express.static(client));
 app.use('/', express.static(client));
-
 app.use('/api', router);
 
 app.listen(PORT, () => {
