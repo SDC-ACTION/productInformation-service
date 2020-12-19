@@ -16,7 +16,7 @@ const getProduct = async (req, res) => {
     if (err) {
       res.status(500).send(err);
     } else if (data) {
-      res.status(200).send(data);
+      res.status(200).send(JSON.parse(data));
     } else {
         try {
           let productInfo = await pool.query(query);
@@ -27,15 +27,7 @@ const getProduct = async (req, res) => {
           console.log(`Failed to find product due to ${err}`);
         }
     }
-  })
-
-  // try {
-  //   let productInfo = await pool.query(query);
-  //   res.status(200).send(productInfo.rows[0]);
-  // } catch(err) {
-  //   res.sendStatus(500);
-  //   console.log(`Failed to find product due to ${err}`);
-  // }
+  });
 };
 
 const saveProduct = async (req, res) => {
