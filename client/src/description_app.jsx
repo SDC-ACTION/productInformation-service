@@ -28,7 +28,7 @@ class DescriptionApp extends React.Component {
     const location = window.location.pathname.split('/');
     const id = location[2];
 
-    fetch(`http://localhost:3004/api/products/${id}`)
+    fetch(`http://54.219.195.213:3004/api/products/${id}`)
       .then((response) => response.json())
       .then((data) => {
         const categoryBrand = [data.name, data.age, data.player_count]

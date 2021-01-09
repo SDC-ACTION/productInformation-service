@@ -31,7 +31,7 @@ class TitleApp extends React.Component {
     const id = location[2];
     const reviewID = location[2];
 
-    fetch(`http://localhost:3004/api/products/${id}`)
+    fetch(`http://54.219.195.213:3004/api/products/${id}`)
       .then((response) => response.json())
       .then((data) => {
         this.setState({
