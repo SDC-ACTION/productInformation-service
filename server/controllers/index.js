@@ -6,6 +6,7 @@ const client = redis.createClient({port: 6379});
 client.on('error', err => console.log(`Error: ${err}`));
 
 const getProduct = async (req, res) => {
+
   const id = req.params.product_id;
   const query = {
     text: 'SELECT * FROM information WHERE id = $1',
@@ -20,6 +21,7 @@ const getProduct = async (req, res) => {
     } else {
         try {
           let productInfo = await pool.query(query);
+          console.log({productInfo});
           client.set(id, JSON.stringify(productInfo.rows[0]));
           res.status(200).send(productInfo.rows[0]);
         } catch(err) {

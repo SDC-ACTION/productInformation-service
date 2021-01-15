@@ -1,7 +1,7 @@
-const { Product } = require('../database/mongoose/models/product.js', {
+/*const { Product } = require('../database/mongoose/models/product.js', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
+});*/
 
 function randNum(min, max) {
   const randomNum = Math.random() * (max - min) + min;
