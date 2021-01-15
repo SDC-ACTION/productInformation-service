@@ -31,7 +31,7 @@ class TitleApp extends React.Component {
     const id = location[2];
     const reviewID = location[2];
 
-    fetch(`http://54.219.195.213:3004/api/products/${id}`)
+    fetch(`http://54.176.68.191:3000/api/products/${id}`)
       .then((response) => response.json())
       .then((data) => {
         this.setState({
@@ -45,21 +45,21 @@ class TitleApp extends React.Component {
           title: data.title,
         });
       });
-    fetch(`http://18.222.37.28:3001/api/reviews/${reviewID}`)
-      .then((response) => (response.json()))
-      .then((data) => {
-        while (count < data.length) {
-          sumRatings = data[count].review_rating + sumRatings;
-          count += 1;
-        }
+    // fetch(`http://18.222.37.28:3001/api/reviews/${reviewID}`)
+    //   .then((response) => (response.json()))
+    //   .then((data) => {
+    //     while (count < data.length) {
+    //       sumRatings = data[count].review_rating + sumRatings;
+    //       count += 1;
+    //     }
 
-        let averageSum = sumRatings / 5;
-        averageSum = Math.round(averageSum);
-        this.setState({
-          TotalReviews: data.length || 0,
-          AverageRating: averageSum || 0,
-        });
-      });
+    //     let averageSum = sumRatings / 5;
+    //     averageSum = Math.round(averageSum);
+    //     this.setState({
+    //       TotalReviews: data.length || 0,
+    //       AverageRating: averageSum || 0,
+    //     });
+    //   });
   }
 
   render() {
@@ -77,4 +77,4 @@ class TitleApp extends React.Component {
   }
 }
 
-ReactDOM.render(<TitleApp />, document.getElementById('title') || document.createElement('div'));
+ReactDOM.render(<TitleApp />, document.getElementById('title'));

@@ -29,9 +29,10 @@ class SpecsApp extends React.Component {
     const location = window.location.pathname.split('/');
     const id = location[2];
 
-    fetch(`http://54.219.195.213:3004/api/products/${id}`)
+    fetch(`http://54.176.68.191:3000/api/products/${id}`)
       .then((response) => response.json())
       .then((data) => {
+        console.log('WHAT IS DATA', data);
         this.setState({
           brand: data.brand || '',
           specsParts: data.part_number || '',
@@ -75,4 +76,4 @@ class SpecsApp extends React.Component {
   }
 }
 
-ReactDOM.render(<SpecsApp />, document.getElementById('specs') || document.createElement('div'));
+ReactDOM.render(<SpecsApp />, document.getElementById('specs'));

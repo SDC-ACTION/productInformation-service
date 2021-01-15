@@ -17,7 +17,7 @@ class DescriptionApp extends React.Component {
     super(props);
 
     this.state = {
-      description: '',
+      description: 'test-description',
       categoryBrand: [],
     };
   }
@@ -27,13 +27,14 @@ class DescriptionApp extends React.Component {
     // const API_REQUEST = process.env.API_REQUEST || 'localhost:3001';
     const location = window.location.pathname.split('/');
     const id = location[2];
+    console.log('DID THIS KICK IN?');
 
-    fetch(`http://54.219.195.213:3004/api/products/${id}`)
+    fetch(`http://54.176.68.191:3000/api/products/${id}`)
       .then((response) => response.json())
       .then((data) => {
         const categoryBrand = [data.name, data.age, data.player_count]
         this.setState({
-          description: data.description || '',
+          description: data.description || 'test-description',
           categoryBrand: categoryBrand || [],
         });
       })
@@ -68,4 +69,4 @@ class DescriptionApp extends React.Component {
   }
 }
 
-ReactDOM.render(<DescriptionApp />, document.getElementById('description') || document.createElement('div'));
+ReactDOM.render(<DescriptionApp />, document.getElementById('description'));

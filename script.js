@@ -16,6 +16,6 @@ export let options = {
 
 export default function () {
   const productId = Math.floor(Math.random() * 10000000);
-  const res = http.get(`http://localhost:3004/api/products/${productId}`);
+  const res = http.get(`http://54.219.195.213:3004/api/products/${productId}`);
   myFailRate.add(res.status !== 200);
 }
